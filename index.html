@@ -17,28 +17,34 @@
   基于 <a href="https://github.com/cf-pages/Telegraph-Image" target="_blank" data-v-5d5649c4>Telegraph</a> 的图片上传工具
 </div></div></div></div></div><script>window.__NUXT__={layout:"default",data:[{}],error:null,serverRendered:!0}</script><script src="/_nuxt/318bf53201c4127c79fc.js" defer></script><script src="/_nuxt/b46e75617207ae5013d0.js" defer></script><script src="/_nuxt/71ef7c30e68aba4a3fc9.js" defer></script><script src="/_nuxt/9e35552f648a5a6a3b24.js" defer></script><script src="/_nuxt/fbd198cfd0f4459e2725.js" defer></script>
   <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // 获取 input 元素
-    var urlInput = document.getElementById("url-content");
+// 假设有一个函数在文件上传完成后被调用，并触发一个自定义事件'fileUploaded'
+function onFileUploaded(event, uploadedUrl) {
+    // 获取url-content输入框的DOM元素
+    var urlInput = document.getElementById('url-content');
 
-    // 检查元素是否存在并获取它的当前值
-    if (urlInput) {
-        var currentURL = urlInput.value;
-
-        // 进行替换操作
-        var modifiedURL = currentURL.replace('h1', 'h2');
-
-        // 设置新的 URL
-        urlInput.value = modifiedURL;
+    // 如果输入框存在且有值
+    if (urlInput && urlInput.value) {
+        // 替换域名
+        urlInput.value = urlInput.value.replace('h1.domain.com', 'h2.domain.com');
     }
+}
 
-    // 如果需要显示 "copy-url" 这个 div，可以将其 display 属性设置为 "block"
-    var copyUrlDiv = document.querySelector(".copy-url");
-    if (copyUrlDiv) {
-        copyUrlDiv.style.display = "block";
-    }
-});
-</script>
+// 添加事件监听器，监听文件上传完成事件
+document.addEventListener('fileUploaded', onFileUploaded);
+
+// 模拟文件上传完成事件的触发
+// 这应该在实际的文件上传逻辑中被调用
+function simulateFileUpload() {
+    // 假设上传文件后得到的URL
+    var uploadedUrl = 'http://h1.domain.com/path/to/file';
+    
+    // 触发文件上传完成事件，并传递URL
+    document.dispatchEvent(new CustomEvent('fileUploaded', { detail: uploadedUrl }));
+}
+
+// 模拟上传文件
+simulateFileUpload();
+  </script>
 
   </body>
 </html>
